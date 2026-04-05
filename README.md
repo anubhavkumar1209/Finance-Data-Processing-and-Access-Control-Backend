@@ -586,6 +586,68 @@ OpenAPI JSON:
 http://localhost:8080/v3/api-docs
 ```
 
+## Deployment
+
+The project can be deployed either directly as a Spring Boot application or as a Docker container.
+
+### Railway Deployment
+
+1. Create a new Railway project.
+2. Connect the GitHub repository:
+
+```text
+https://github.com/anubhavkumar1209/Finance-Data-Processing-and-Access-Control-Backend
+```
+
+3. Add a PostgreSQL service.
+4. In the backend service, configure these environment variables:
+
+```text
+SPRING_DATASOURCE_URL=jdbc:postgresql://<host>:<port>/<database>
+SPRING_DATASOURCE_USERNAME=<username>
+SPRING_DATASOURCE_PASSWORD=<password>
+APP_JWT_SECRET=<base64-encoded-32-byte-secret>
+APP_JWT_EXPIRATION_MINUTES=120
+```
+
+5. Railway can deploy this project in either of these ways:
+
+- Build directly with Maven:
+  - Build command: `mvn clean package -DskipTests`
+  - Start command: `java -jar target/finance-dashboard-0.0.1-SNAPSHOT.jar`
+- Build from the included Dockerfile
+
+The application already supports cloud port binding through:
+
+```text
+server.port=${PORT:8080}
+```
+
+### Docker Deployment
+
+Build the image:
+
+```bash
+docker build -t finance-dashboard .
+```
+
+Run the container:
+
+```bash
+docker run -p 8080:8080 \
+  -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/finance_dashboard \
+  -e SPRING_DATASOURCE_USERNAME=postgres \
+  -e SPRING_DATASOURCE_PASSWORD=your-password \
+  -e APP_JWT_SECRET=your-base64-encoded-32-byte-secret \
+  finance-dashboard
+```
+
+After deployment, Swagger is available at:
+
+```text
+https://<your-domain>/swagger-ui.html
+```
+
 ## Local Setup
 
 1. Create a PostgreSQL database named `finance_dashboard`.
