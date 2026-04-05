@@ -1,0 +1,42 @@
+# Build output
+target/
+out/
+build/
+
+# Java / JVM artifacts
+*.class
+*.log
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# Runtime logs
+boot.out
+boot.err
+logs/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.*
+
+# Local Spring overrides and secrets
+application-local.yml
+application-secret.yml
+src/main/resources/application-local.yml
+src/main/resources/application-secret.yml
